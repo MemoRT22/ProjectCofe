@@ -31,6 +31,10 @@ urlpatterns = [
     path('recipe/', include(recipe_patterns)),
     path('page/', include('pages.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
+    # Paths de autenticación
+    path('accounts/', include('django.contrib.auth.urls')),
+    # Aumentar la lista de posibles urls en la raiz de la aplicación
+    path('accounts/', include('registration.urls')),
 ]
 
 if settings.DEBUG:
