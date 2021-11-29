@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% block content %}
+{% include "pages/includes/menu_pages.html" %}
+{% load static %}
+<div class="container mb-4">
+    {% for page in page_list %}
+       
+    <div class="row mt-3">
+        <div class="col-md-9 mx-auto text-light">
+            <h2 class="section-heading mb-4">
+                <span class="section-heading-lower">{{page.title}}</span>
+            </h2>
+            <div>
+                <p>{{page.content|safe|truncatechars:"400"}}</p>
+                <p>
+                    <a class="btn btn-success" href="{% url 'page_detail' page.id page.title|slugify %}" role="button">Leer más</a>
+                    {% if request.user.is_staff %}
+                        <a class="btn btn-info" href="{% url 'update_page' page.id %}" role="button">Editar</a>
+                        <a class="btn btn-secondary" href="{% url 'delete_page' page.id %}" role="button">Eliminar</a> 
+                    {% endif %} 
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+     
+</div>
+
+
+{% endblock %}
